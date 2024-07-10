@@ -1,0 +1,60 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title></title>
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="2487.3">
+  <style type="text/css">
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica}
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica; min-height: 14.0px}
+  </style>
+</head>
+<body>
+<p class="p1">&lt;!DOCTYPE html&gt;</p>
+<p class="p1">&lt;html lang="en"&gt;</p>
+<p class="p1">&lt;head&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;meta charset="UTF-8"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;title&gt;Real-Time Order Notifications&lt;/title&gt;</p>
+<p class="p1">&lt;/head&gt;</p>
+<p class="p1">&lt;body&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;h1&gt;Real-Time Order Notifications&lt;/h1&gt;</p>
+<p class="p2"><span class="Apple-converted-space">  </span></p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;!-- Placeholder for displaying the image --&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;div id="orderImageContainer"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;img id="orderImage" src="" alt="Order Image" style="max-width: 100%; display: none;"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;!-- Include the Pusher JavaScript library --&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;script src="https://js.pusher.com/7.0/pusher.min.js"&gt;&lt;/script&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;script&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>// Enable Pusher logging - don't include this in production</p>
+<p class="p1"><span class="Apple-converted-space">    </span>Pusher.logToConsole = true;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>// Initialize Pusher with your app key and cluster</p>
+<p class="p1"><span class="Apple-converted-space">    </span>const pusher = new Pusher('YOUR_APP_KEY', {</p>
+<p class="p1"><span class="Apple-converted-space">      </span>cluster: 'YOUR_APP_CLUSTER'</p>
+<p class="p1"><span class="Apple-converted-space">    </span>});</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>// Subscribe to the channel where events are sent</p>
+<p class="p1"><span class="Apple-converted-space">    </span>const channel = pusher.subscribe('my-channel');</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>// Bind to the event triggered by your backend (e.g., new order event)</p>
+<p class="p1"><span class="Apple-converted-space">    </span>channel.bind('new-order', function(data) {</p>
+<p class="p1"><span class="Apple-converted-space">      </span>console.log('Received new order event:', data);</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">      </span>// Update the image source with the URL received from the event</p>
+<p class="p1"><span class="Apple-converted-space">      </span>const imageUrl = data.imageUrl;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>if (imageUrl) {</p>
+<p class="p1"><span class="Apple-converted-space">        </span>const orderImage = document.getElementById('orderImage');</p>
+<p class="p1"><span class="Apple-converted-space">        </span>orderImage.src = imageUrl;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>orderImage.style.display = 'block';</p>
+<p class="p1"><span class="Apple-converted-space">      </span>}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>});</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;/script&gt;</p>
+<p class="p1">&lt;/body&gt;</p>
+<p class="p1">&lt;/html&gt;</p>
+</body>
+</html>
